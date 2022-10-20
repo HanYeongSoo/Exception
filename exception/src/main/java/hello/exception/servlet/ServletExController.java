@@ -1,11 +1,17 @@
 package hello.exception.servlet;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Controller
@@ -26,4 +32,10 @@ public class ServletExController {
         response.sendError(500);
     }
 
+    @ResponseBody
+    @PostMapping("/request-body-string-v4")
+    public String requestBodyStringV4(@RequestBody String messageBody) {
+        log.info("messageBody={}", messageBody);
+        return "ok";
+    }
 }
